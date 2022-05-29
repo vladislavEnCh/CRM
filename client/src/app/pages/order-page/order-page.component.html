@@ -1,0 +1,65 @@
+<div class="page-title">
+  <h4 *ngIf="isRoot">Order</h4>
+  <h4 *ngIf="!isRoot">
+    <a routerLink="/order">Order</a>
+    <i class="material-icons">keyboard_arrow_right</i>
+    Add product
+  </h4>
+  <button
+    [disabled]="order.list.length == 0"
+    (click)="open()"
+    class="waves-effect btn grey darken-1"
+  >
+    Done
+  </button>
+</div>
+
+<router-outlet></router-outlet>
+<div #modal id="explore-order" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4 class="mb1">Your order</h4>
+    <table class="highlight">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of order.list">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>${{ item.cost }}</td>
+          <td (click)="removePosition(item)">
+            <i class="material-icons pointer">delete</i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="order-summary">
+      <p>
+        total cost <strong>{{ order.price }}$</strong>
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      (click)="cancel()"
+      href="#!"
+      class="modal-action waves-effect waves-black btn-flat"
+      [disabled]="loading"
+    >
+      Отмена
+    </button>
+    <button
+      [disabled]="order.list.length == 0 || loading"
+      (click)="submit()"
+      class="modal-action btn waves-effect"
+    >
+      Submit
+    </button>
+  </div>
+</div>

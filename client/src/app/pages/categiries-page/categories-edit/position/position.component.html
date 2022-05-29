@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col s12">
+    <div class="page-subtitle">
+      <h4>Position:</h4>
+      <button
+        (click)="onAddPosition()"
+        class="waves-effect waves-light btn grey darken-1 btn-small"
+      >
+        Add position
+      </button>
+    </div>
+    <div *ngIf="!loading; else loader">
+      <div *ngIf="positions.length !== 0; else empty" class="collection">
+        <a
+          (click)="selectPosition(position)"
+          *ngFor="let position of positions"
+          class="collection-item collection-item-icon"
+        >
+          <span>
+            {{ position.name }} <strong>{{ position.cost }} dollar.</strong>
+          </span>
+          <span (click)="onDeletePosition($event, position)">
+            <i class="material-icons">delete</i>
+          </span>
+        </a>
+      </div>
+      <ng-template #empty> <div class="center">Empty here</div></ng-template>
+    </div>
+    <ng-template #loader><app-loader></app-loader></ng-template>
+  </div>
+</div>
+
+<form [formGroup]="modalForm" #modal class="modal">
+  <div class="modal-content">
+    <h4 class="mb1">Add position</h4>
+    <div class="input-field">
+      <input
+        [ngClass]="{
+          invalid:
+            modalForm.get('name')?.invalid && modalForm.get('name')?.touched
+        }"
+        formControlName="name"
+        id="pos-name"
+        type="text"
+        required
+      />
+      <label for="pos-name">Название</label>
+      <span
+        *ngIf="modalForm.get('name')?.invalid && modalForm.get('name')?.touched"
+        class="red-text"
+        >Must not be empty</span
+      >
+    </div>
+    <div class="input-field">
+      <input
+        [ngClass]="{
+          invalid:
+            modalForm.get('cost')?.invalid && modalForm.get('cost')?.touched
+        }"
+        formControlName="cost"
+        id="pos-cost"
+        type="text"
+        required
+      />
+      <label for="pos-cost">Price</label>
+      <span
+        *ngIf="modalForm.get('cost')?.invalid && modalForm.get('cost')?.touched"
+        class="red-text"
+        >Must not be empty</span
+      >
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      (click)="onCancel()"
+      class="modal-action waves-effect waves-black btn-flat"
+    >
+      Cancel
+    </button>
+    <button
+      (click)="saveData()"
+      [disabled]="modalForm.invalid"
+      class="modal-action btn waves-effect"
+    >
+      Save
+    </button>
+  </div>
+</form>

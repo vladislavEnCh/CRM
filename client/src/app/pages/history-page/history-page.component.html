@@ -1,0 +1,19 @@
+<div class="page-title">
+  <h4>History orders</h4>
+  <button class="btn btn-small">
+    <i class="material-icons">filter_list</i>
+  </button>
+</div>
+<app-filter (onFilter)="applyFilter($event)"></app-filter>
+<app-list [orders]="orders"></app-list>
+
+<div class="center mb2">
+  <button
+    *ngIf="!loading; else loader"
+    (click)="loadMore()"
+    class="btn waves-effect grey darken-1 btn-small"
+  >
+    Load more
+  </button>
+  <ng-template #loader></ng-template>
+</div>

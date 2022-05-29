@@ -1,0 +1,41 @@
+<!-- <nav class="nav">
+  <div class="container">
+    <div class="logo">CRM VLAD</div>
+    <div class="menu">
+      <ul>
+        <li [routerLink]="['/overview']" class="menu_item">Обзор</li>
+        <li [routerLink]="['/order']" class="menu_item">Добавить заказ</li>
+        <li [routerLink]="['/history']" class="menu_item">История</li>
+        <li [routerLink]="['/analytics']" class="menu_item">Аналитика</li>
+        <li [routerLink]="['/categiries']" class="menu_item">Ассортимент</li>
+      </ul>
+    </div>
+    <div class="atributs">
+      <span>Выйти</span>
+    </div>
+  </div>
+</nav> -->
+<ul class="sidenav sidenav-fixed a-sidenav">
+  <h4>CRM VLAD</h4>
+  <li [routerLinkActive]="'active'" [routerLink]="['/overview']" class="bold">
+    <a class="waves-effect waves-orange">Overview</a>
+  </li>
+  <li [routerLinkActive]="'active'" [routerLink]="['/analytics']" class="bold">
+    <a class="waves-effect waves-orange">Analitycs</a>
+  </li>
+  <li [routerLinkActive]="'active'" [routerLink]="['/history']" class="bold">
+    <a class="waves-effect waves-orange">History</a>
+  </li>
+  <li [routerLinkActive]="'active'" [routerLink]="['/order']" class="bold">
+    <a class="waves-effect waves-orange">Add order</a>
+  </li>
+  <li [routerLinkActive]="'active'" [routerLink]="['/categories']" class="bold">
+    <a class="waves-effect waves-orange">Assortment</a>
+  </li>
+  <li [routerLink]="['/login']" class="bold last">
+    <a class="waves-effect waves-orange">Log out</a>
+  </li>
+</ul>
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
